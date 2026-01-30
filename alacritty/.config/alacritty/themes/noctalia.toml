@@ -1,4 +1,4 @@
-# Colors (TokyoNight)
+# Colors (Noctalia)
 
 [colors.bright]
 black = '#414868'
@@ -12,7 +12,7 @@ yellow = '#e0af68'
 
 [colors.cursor]
 cursor = '#c0caf5'
-text = '#15161e'
+text = '#1a1b26'
 
 [colors.normal]
 black = '#15161e'
@@ -29,5 +29,5 @@ background = '#1a1b26'
 foreground = '#c0caf5'
 
 [colors.selection]
-background = '#33467c'
+background = '#283457'
 text = '#c0caf5'

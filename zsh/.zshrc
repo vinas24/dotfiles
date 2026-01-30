@@ -1,3 +1,5 @@
+# fastfetch --config ~/.config/fastfetch/configMini.jsonc
+
 # Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.zshrc.
 # Initialization code that may require console input (password prompts, [y/n]
 # confirmations, etc.) must go above this block; everything else may go below.
@@ -8,6 +10,12 @@ fi
 # Set the directory we want to store zinit and plugins
 ZINIT_HOME="${XDG_DATA_HOME:-${HOME}/.local/share}/zinit/zinit.git"
 
+#For ssh-agent to only one socket
+export SSH_AUTH_SOCK="$HOME/.ssh/agent/ssh-agent.sock"
+if [ ! -S "$SSH_AUTH_SOCK" ]; then
+	eval $(ssh-agent -a "$SSH_AUTH_SOCK") > /dev/null
+fi
+
 # Download Zinit, if it's not there yet
 if [ ! -d "$ZINIT_HOME" ]; then
    mkdir -p "$(dirname $ZINIT_HOME)"
@@ -16,7 +24,6 @@ fi
 
 # Source/Load zinit
 source "${ZINIT_HOME}/zinit.zsh"
-
 # Add in Powerlevel10k
 zinit ice depth=1; zinit light romkatv/powerlevel10k
 
@@ -63,8 +70,20 @@ zstyle ':completion:*' matcher-list 'm:{a-z}={A-Za-z}'
 zstyle ':completion:*' list-colors "${(s.:.)LS_COLORS}"
 zstyle ':completion:*' menu no
 
+#Extra config
+# source "~/.zsh_extra"
+
 # Aliases
 alias ls='ls --color'
 alias vim='nvim'
 alias c='clear'
-alias ucmConnect='OPENSSL_CONF=/usr/share/globalprotect-openconnect/openssl.cnf && sudo gpclient --fix-openssl connect galeria.ucm.es'
+
+# shell wrapper for yazi
+function y() {
+	local tmp="$(mktemp -t "yazi-cwd.XXXXXX")" cwd
+	command yazi "$@" --cwd-file="$tmp"
+	IFS= read -r -d '' cwd < "$tmp"
+	[ "$cwd" != "$PWD" ] && [ -d "$cwd" ] && builtin cd -- "$cwd"
+	rm -f -- "$tmp"
+}
+

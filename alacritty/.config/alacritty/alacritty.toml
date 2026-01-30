@@ -66,6 +66,7 @@ x = 8
 y = 8
 
 [general]
+import = ["~/.config/alacritty/themes/noctalia.toml"]
 import = ["themes/noctalia.toml"]
 live_config_reload = true
 
