@@ -10,11 +10,15 @@ fi
 # Set the directory we want to store zinit and plugins
 ZINIT_HOME="${XDG_DATA_HOME:-${HOME}/.local/share}/zinit/zinit.git"
 
-#For ssh-agent to only one socket
-export SSH_AUTH_SOCK="$HOME/.ssh/agent/ssh-agent.sock"
-if [ ! -S "$SSH_AUTH_SOCK" ]; then
-	eval $(ssh-agent -a "$SSH_AUTH_SOCK") > /dev/null
+# Load extra aliases
+if [ -f ~/.zsh_extra ]; then
+    source ~/.zsh_extra
 fi
+#For ssh-agent to only one socket
+# export SSH_AUTH_SOCK="$HOME/.ssh/agent/ssh-agent.sock"
+# if [ ! -S "$SSH_AUTH_SOCK" ]; then
+# 	eval $(ssh-agent -a "$SSH_AUTH_SOCK") > /dev/null
+# fi
 
 # Download Zinit, if it's not there yet
 if [ ! -d "$ZINIT_HOME" ]; then

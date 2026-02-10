@@ -1,0 +1,3 @@
+tmux/.tmux/plugins/*
+noctalia/.config/noctalia/plugins/*
+niri/.config/niri/scripts/*
