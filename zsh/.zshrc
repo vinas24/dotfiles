@@ -91,3 +91,5 @@ function y() {
 	rm -f -- "$tmp"
 }
 
+
+. "$HOME/.local/bin/env"

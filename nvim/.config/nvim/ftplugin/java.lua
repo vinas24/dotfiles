@@ -95,10 +95,10 @@ local config = {
       format = {
         enabled = true,
         -- Formatting works by default, but you can refer to a specific file/URL if you choose
-        -- settings = {
-        --   url = "https://github.com/google/styleguide/blob/gh-pages/intellij-java-google-style.xml",
-        --   profile = "GoogleStyle",
-        -- },
+        settings = { --Cambiar a "eclipse-..." a "intellij-.."
+          url = 'https://github.com/google/styleguide/blob/gh-pages/eclipse-java-google-style.xml',
+          profile = 'GoogleStyle',
+        },
       },
       completion = {
         favoriteStaticMembers = {
@@ -131,24 +131,21 @@ local config = {
       },
     },
   },
-  capabilities = require('blink-cmp').get_lsp_capabilities(),
+  -- Native LSP capabilities (no blink.cmp) — snippetSupport on so completion
+  -- items with placeholders still expand via the built-in `vim.snippet`.
+  capabilities = (function()
+    local caps = vim.lsp.protocol.make_client_capabilities()
+    caps.textDocument.completion.completionItem.snippetSupport = true
+    return caps
+  end)(),
   flags = {
     allow_incremental_sync = true,
   },
   init_options = {
+    -- References the bundles defined above to support Debugging and Unit Testing
     bundles = bundles,
     extendedClientCapabilities = jdtls.extendedClientCapabilities,
   },
-  -- -- Needed for auto-completion with method signatures and placeholders
-  -- capabilities = require('blink.cmp').default_capabilities(),
-  -- flags = {
-  --   allow_incremental_sync = true,
-  -- },
-  -- init_options = {
-  --   -- References the bundles defined above to support Debugging and Unit Testing
-  --   bundles = bundles,
-  --   extendedClientCapabilities = jdtls.extendedClientCapabilities,
-  -- },
 }
 --
 -- -- Needed for debugging
