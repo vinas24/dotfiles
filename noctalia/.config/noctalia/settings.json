@@ -14,13 +14,11 @@
         "enableSessionSearch": true,
         "enableSettingsSearch": true,
         "enableWindowsSearch": true,
-        "iconMode": "tabler",
+        "iconMode": "native",
         "ignoreMouseInput": false,
         "overviewLayer": false,
         "pinnedApps": [
-            "onlyoffice-desktopeditors",
-            "zen",
-            "kdesystemsettings"
+            "zen"
         ],
         "position": "center",
         "screenshotAnnotationTool": "",

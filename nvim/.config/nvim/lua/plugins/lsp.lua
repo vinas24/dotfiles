@@ -30,11 +30,6 @@ vim.api.nvim_create_autocmd('LspAttach', {
 
     local client = vim.lsp.get_client_by_id(event.data.client_id)
 
-    if client and client:supports_method(vim.lsp.protocol.Methods.textDocument_completion, event.buf) then
-      -- Native insert-mode completion, driven by this LSP client (replaces blink.cmp)
-      vim.lsp.completion.enable(true, client.id, event.buf, { autotrigger = true })
-    end
-
     if client and client:supports_method(vim.lsp.protocol.Methods.textDocument_documentHighlight, event.buf) then
       local highlight_augroup = vim.api.nvim_create_augroup('kickstart-lsp-highlight', { clear = false })
       vim.api.nvim_create_autocmd({ 'CursorHold', 'CursorHoldI' }, {
@@ -93,10 +88,9 @@ vim.diagnostic.config {
   },
 }
 
--- Capabilities: plain native LSP capabilities, with snippet support turned on
--- for completion items (used to come from blink.cmp).
-local capabilities = vim.lsp.protocol.make_client_capabilities()
-capabilities.textDocument.completion.completionItem.snippetSupport = true
+-- local capabilities = vim.lsp.protocol.make_client_capabilities()
+-- capabilities.textDocument.completion.completionItem.snippetSupport = true
+local capabilities = require('blink.cmp').get_lsp_capabilities()
 
 local servers = {
   clangd = {},

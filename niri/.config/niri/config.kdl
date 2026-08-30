@@ -127,6 +127,7 @@ layout {
     // Set gaps around windows in logical pixels.
     gaps 8
     
+    background-color "transparent"
 
     // When to center a column when changing focus, options are:
     // - "never", default behavior, focusing an off-screen column will keep at the left
@@ -326,11 +327,16 @@ animations {
 // https://yalter.github.io/niri/Configuration:-Window-Rules
 window-rule {
     draw-border-with-background false
+    open-maximized true
     clip-to-geometry true
     geometry-corner-radius 8
 }
 
-/-window-rule {
+window-rule {
+    exclude app-id=r#"^(mpv|vlc|org\.kde\.haruna|org\.kde\.gwenview|com\.github\.flxzt\.rnote)$"#
+    exclude app-id=r#"^zen$"# title="^Picture-in-Picture$"
+    exclude app-id=r#"^zen$"# title=r#"(?i)youtube"#
+
 	opacity 0.8
 	background-effect {
 	        blur true
@@ -339,18 +345,12 @@ window-rule {
 }
 
 window-rule {
-	match app-id=r"#zen$"
-	open-maximized true
-	open-floating false
-}
-
-window-rule {
 	match app-id="kcalc"
 	match app-id="Gpauth"
 	open-floating true
 }
 
-/-window-rule {
+window-rule {
     match app-id=r#"^org\.keepassxc\.KeePassXC$"#
     match app-id=r#"^org\.gnome\.World\.Secrets$"#
     block-out-from "screen-capture"
@@ -370,29 +370,35 @@ window-rule {
     }
 }
 
-//Jetbrains IDEs in fullscreen
-/-window-rule {
-	match app-id="^jetbrains-.*$" is-floating=false
-    open-maximized true
+layer-rule {
+    match namespace="^noctalia-wallpaper*"
+    place-within-backdrop true
 }
 
-/-layer-rule {
-    match namespace="noctalia.*"
-    exclude namespace="(bar|noctalia-background)"
-
+layer-rule {
+    match namespace="^noctalia-(background|launcher-overlay)-.*$"
     background-effect {
-        blur true
-        xray true
+        xray false
     }
 }
 
-/-layer-rule {
-    match namespace="(toast|osd|noctalia-popup)"
-
-    background-effect {
-        blur false
+overview {
+    workspace-shadow {
+        off
     }
 }
+
+debug {
+    honor-xdg-activation-with-invalid-serial
+}
+
+blur {
+    passes 2
+    offset 3.0
+    noise 0.03
+    saturation 1.0
+}
+
 
 binds {
     // Keys consist of modifiers separated by + signs, followed by an XKB key name
@@ -418,6 +424,7 @@ binds {
     //Noctalia-shell binds
     Mod+P hotkey-overlay-title="Open clipHistory" { spawn-sh "qs -c noctalia-shell ipc call launcher clipboard"; }  
     Mod+Escape hotkey-overlay-title="Open control panel" { spawn-sh "qs -c noctalia-shell ipc call controlCenter toggle"; } 
+    Mod+Shift+W hotkey-overlay-title="Open wallpaper selector" { spawn-sh "qs -c noctalia-shell ipc call wallpaper toggle";}
 
     // Use spawn-sh to run a shell command. Do this if you need pipes, multiple commands, etc.
     // Note: the entire command goes as a single argument. It's passed verbatim to `sh -c`.
@@ -680,4 +687,13 @@ binds {
     // moving the mouse or pressing any other key.
     Mod+Shift+P { power-off-monitors; }
 }
+
+switch-events {
+    // lid-close { spawn "qs" "-c" "noctalia-shell" "ipc" "call" "lockScreen" "lock";}
+    lid-close { spawn "qs" "-c" "noctalia-shell" "ipc" "call" "sessionMenu" "lockAndSuspend";}
+}
+
+
+
 include "./noctalia.kdl"
+

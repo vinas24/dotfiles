@@ -131,10 +131,8 @@ local config = {
       },
     },
   },
-  -- Native LSP capabilities (no blink.cmp) — snippetSupport on so completion
-  -- items with placeholders still expand via the built-in `vim.snippet`.
   capabilities = (function()
-    local caps = vim.lsp.protocol.make_client_capabilities()
+    local caps = require('blink.cmp').get_lsp_capabilities()
     caps.textDocument.completion.completionItem.snippetSupport = true
     return caps
   end)(),

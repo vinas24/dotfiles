@@ -1,0 +1,77 @@
+[mgr]
+# show_hidden = true
+linemode = "size" 
+sort_by = "natural"
+sort_translit = true
+
+[opener]
+pdf_reader = [
+    { run = 'xdg-open "$@"', orphan = true, desc = "Browser" }
+]
+video_player = [
+	{run = 'haruna "$@"', orphan = true, desc = "Haruna"}
+]
+office_suite = [
+    { run = 'onlyoffice-desktopeditors "$@"', orphan = true, desc = "OnlyOffice" }
+]
+image_editor = [
+    { run = 'gwenview "$@"', orphan = true, desc = "Gwenview" }
+]
+text_editor = [
+	{run =  'nvim "$@"', block = true, desc = "Neovim"}
+]
+
+
+[open]
+prepend_rules = [
+# Video
+    { url = "*.mp4",  use = "video_player" },
+    { url = "*.mkv",  use = "video_player" },
+    { url = "*.avi",  use = "video_player" },
+    { url = "*.mov",  use = "video_player" },
+    { url = "*.webm", use = "video_player" },
+    { url = "*.flv",  use = "video_player" },
+    { url = "*.wmv",  use = "video_player" },
+    { url = "*.m4v",  use = "video_player" },
+# Pdf files
+    { url = "*.pdf", use = "pdf_reader" },
+# Documents
+    { url = "*.doc*", use = "office_suite" },
+    { url = "*.xls*", use = "office_suite" },
+    { url = "*.ppt*", use = "office_suite" },
+    { url = "*.csv",  use = "office_suite" },
+    { url = "*.odt",  use = "office_suite" },
+    { url = "*.ods",  use = "office_suite" },
+    { url = "*.odp",  use = "office_suite" },
+# Images
+    { url = "*.png",  use = "image_editor" },
+    { url = "*.jpg",  use = "image_editor" },
+    { url = "*.jpeg", use = "image_editor" },
+    { url = "*.bmp",  use = "image_editor" },
+    { url = "*.gif",  use = "image_editor" },
+    { url = "*.webp", use = "image_editor" },
+    { url = "*.svg",  use = "image_editor" },
+    { url = "*.tiff", use = "image_editor" },
+# Text
+    { url = "*.txt",  use = "text_editor" },
+    { url = "*.md",   use = "text_editor" },
+    { url = "*.json", use = "text_editor" },
+    { url = "*.yaml", use = "text_editor" },
+    { url = "*.yml",  use = "text_editor" },
+    { url = "*.toml", use = "text_editor" },
+    { url = "*.conf", use = "text_editor" },
+    { url = "*.cfg",  use = "text_editor" },
+    { url = "*.ini",  use = "text_editor" },
+    { url = "*.log",  use = "text_editor" },
+    { url = "*.sh",   use = "text_editor" },
+    { url = "*.py",   use = "text_editor" },
+    { url = "*.js",   use = "text_editor" },
+    { url = "*.ts",   use = "text_editor" },
+    { url = "*.rs",   use = "text_editor" },
+    { url = "*.c",    use = "text_editor" },
+    { url = "*.cpp",  use = "text_editor" },
+    { url = "*.h",    use = "text_editor" },
+    { url = "*.lua",  use = "text_editor" },
+    { url = "*.rc",   use = "text_editor" },
+]
+

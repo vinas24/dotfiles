@@ -36,9 +36,9 @@ vim.o.confirm = true
 
 -- Native insert-mode auto-completion (replaces blink.cmp / LuaSnip).
 -- LSP completion items still expand snippets automatically via `vim.snippet`.
-vim.o.autocomplete = true
-vim.o.completeopt = 'menu,menuone,noselect,popup'
-vim.o.pumborder = 'rounded'
-vim.o.pummaxwidth = 40
+-- vim.o.autocomplete = true
+-- vim.o.completeopt = 'menu,menuone,noselect,popup'
+-- vim.o.pumborder = 'rounded'
+-- vim.o.pummaxwidth = 40
 
 vim.lsp.document_color.enable()

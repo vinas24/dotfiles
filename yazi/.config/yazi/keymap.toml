@@ -1,0 +1,10 @@
+[[manager.prepend_keymap]]
+on = [ "f" ]
+exec = "plugin smart-filter"
+desc = "Fuzzy-find files"
+
+
+[[manager.prepend_keymap]]
+on = [ "F" ]
+exec = "plugn max-preview"
+desc = "Maximizde preview"

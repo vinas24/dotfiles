@@ -46,4 +46,7 @@ vim.pack.add {
   'https://github.com/nvim-neotest/nvim-nio',
   'https://github.com/jay-babu/mason-nvim-dap.nvim',
   'https://github.com/leoluz/nvim-dap-go',
+  'https://github.com/saghen/blink.lib',
+  'https://github.com/saghen/blink.cmp',
+  'https://github.com/rafamadriz/friendly-snippets',
 }
