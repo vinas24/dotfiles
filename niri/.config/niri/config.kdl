@@ -286,7 +286,8 @@ layout {
 
 // This line starts waybar, a commonly used bar for Wayland compositors.
 //spawn-at-startup "waybar"
-spawn-at-startup "qs" "-c" "noctalia-shell"
+// spawn-at-startup "qs" "-c" "noctalia-shell"
+spawn-at-startup "noctalia > ~/logNoctalia.txt"
 
 // To run a shell command (with variables, pipes, etc.), use spawn-sh-at-startup:
 // spawn-sh-at-startup "qs -c ~/source/qs/MyAwesomeShell"
@@ -371,7 +372,7 @@ window-rule {
 }
 
 layer-rule {
-    match namespace="^noctalia-wallpaper*"
+    match namespace="^noctalia-wallpaper"
     place-within-backdrop true
 }
 
@@ -413,18 +414,32 @@ binds {
 
     // Mod-Shift-/, which is usually the same as Mod-?,
     // shows a list of important hotkeys.
-    Mod+Shift+Slash { spawn-sh "qs -c noctalia-shell ipc call plugin:keybind-cheatsheet toggle"; }
+    // Mod+Shift+Slash { spawn-sh "qs -c noctalia-shell ipc call plugin:keybind-cheatsheet toggle"; }
+    Mod+Shift+Slash { spawn "noctalia" "msg" "panel-toggle" "kenn/keybind-cheatsheet:cheatsheet"; }
     // Suggested binds for running programs: terminal, app launcher, screen locker.
     Mod+Return hotkey-overlay-title="Open a Terminal: ghostty" { spawn "ghostty"; }
-    Mod+Space hotkey-overlay-title="Run App Launcher" { spawn-sh "qs -c noctalia-shell ipc call launcher toggle"; }
+
+    // Mod+Space hotkey-overlay-title="Run App Launcher" { spawn-sh "qs -c noctalia-shell ipc call launcher toggle"; }
+    Mod+Space hotkey-overlay-title="Run App Launcher" { spawn-sh "noctalia msg panel-toggle launcher"; }
+
     Mod+B hotkey-overlay-title="Open Browser: Zen" { spawn "zen-browser"; }
-    // Mod+Y hotkey-overlay-title="Open yazi"{spawn-sh "ghostty yazi";}
-    Mod+Alt+L hotkey-overlay-title="Open session menu" {spawn-sh "qs -c noctalia-shell ipc call sessionMenu toggle"; }
+    
+    Alt+Tab { spawn-sh "noctalia msg window-switcher"; }
+
+    // Mod+Alt+L hotkey-overlay-title="Open session menu" {spawn-sh "qs -c noctalia-shell ipc call sessionMenu toggle"; }
+    Mod+Alt+L hotkey-overlay-title="Open session menu" {spawn-sh "noctalia msg panel-toggle session"; }
 
     //Noctalia-shell binds
-    Mod+P hotkey-overlay-title="Open clipHistory" { spawn-sh "qs -c noctalia-shell ipc call launcher clipboard"; }  
-    Mod+Escape hotkey-overlay-title="Open control panel" { spawn-sh "qs -c noctalia-shell ipc call controlCenter toggle"; } 
-    Mod+Shift+W hotkey-overlay-title="Open wallpaper selector" { spawn-sh "qs -c noctalia-shell ipc call wallpaper toggle";}
+    // Mod+P hotkey-overlay-title="Open clipHistory" { spawn-sh "qs -c noctalia-shell ipc call launcher clipboard"; }  
+    Mod+P hotkey-overlay-title="Open session menu" {spawn-sh "noctalia msg panel-toggle clipboard"; }
+
+    // Mod+Escape hotkey-overlay-title="Open control panel" { spawn-sh "qs -c noctalia-shell ipc call controlCenter toggle"; } 
+    Mod+Escape hotkey-overlay-title="Open control panel" { spawn-sh "noctalia msg panel-toggle control-center"; } 
+
+    // Mod+Shift+W hotkey-overlay-title="Open wallpaper selector" { spawn-sh "qs -c noctalia-shell ipc call wallpaper toggle";}
+    Mod+Shift+W hotkey-overlay-title="Open clipHistory" { spawn-sh "noctalia msg panel-toggle wallpaper"; }  
+
+    Mod+N hotkey-overlay-title="Open notes" {spawn-sh "noctalia msg panel-toggle noctalia/notes:panel";}
 
     // Use spawn-sh to run a shell command. Do this if you need pipes, multiple commands, etc.
     // Note: the entire command goes as a single argument. It's passed verbatim to `sh -c`.
@@ -435,9 +450,10 @@ binds {
     // The allow-when-locked=true property makes them work even when the session is locked.
     // Using spawn-sh allows to pass multiple arguments together with the command.
     // "-l 1.0" limits the volume to 100%.
-    XF86AudioRaiseVolume allow-when-locked=true { spawn-sh "wpctl set-volume @DEFAULT_AUDIO_SINK@ 0.02+ -l 1.0"; }
-    XF86AudioLowerVolume allow-when-locked=true { spawn-sh "wpctl set-volume @DEFAULT_AUDIO_SINK@ 0.02-"; }
-    XF86AudioMute        allow-when-locked=true { spawn-sh "wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle"; }
+    // XF86AudioRaiseVolume allow-when-locked=true { spawn-sh "wpctl set-volume @DEFAULT_AUDIO_SINK@ 0.02+ -l 1.0"; }
+    XF86AudioRaiseVolume allow-when-locked=true { spawn-sh "noctalia msg volume-up"; }
+    XF86AudioLowerVolume allow-when-locked=true { spawn-sh "noctalia msg volume-down"; }
+    XF86AudioMute        allow-when-locked=true { spawn-sh "noctalia msg volume-mute"; }
     XF86AudioMicMute     allow-when-locked=true { spawn-sh "wpctl set-mute @DEFAULT_AUDIO_SOURCE@ toggle"; }
 
     // Example media keys mapping using playerctl.
@@ -450,8 +466,8 @@ binds {
     // Example brightness key mappings for brightnessctl.
     // You can use regular spawn with multiple arguments too (to avoid going through "sh"),
     // but you need to manually put each argument in separate "" quotes.
-    XF86MonBrightnessUp allow-when-locked=true { spawn "brightnessctl" "--class=backlight" "set" "+5%"; }
-    XF86MonBrightnessDown allow-when-locked=true { spawn "brightnessctl" "--class=backlight" "set" "5%-"; }
+    XF86MonBrightnessUp allow-when-locked=true { spawn-sh "noctalia msg brightness-up";}
+    XF86MonBrightnessDown allow-when-locked=true { spawn-sh "noctalia msg brightness-down";}
 
     // Open/close the Overview: a zoomed-out view of workspaces and windows.
     // You can also move the mouse into the top-left hot corner,
@@ -690,10 +706,11 @@ binds {
 
 switch-events {
     // lid-close { spawn "qs" "-c" "noctalia-shell" "ipc" "call" "lockScreen" "lock";}
-    lid-close { spawn "qs" "-c" "noctalia-shell" "ipc" "call" "sessionMenu" "lockAndSuspend";}
+    lid-close { spawn "noctalia" "msg" "session" "lock-and-suspend";}
 }
 
 
 
-include "./noctalia.kdl"
 
+
+include "noctalia.kdl"

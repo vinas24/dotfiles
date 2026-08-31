@@ -1,0 +1,213 @@
+[bar.default]
+background_opacity = 0.89999997988343239
+end = [ "media", "tray", "notifications", "brightness", "volume", "bluetooth", "network", "battery", "session" ]
+font_family = "JetBrainsMono NFM"
+margin_edge = 2
+margin_ends = 10
+padding = 20
+radius = 20
+start = [ "control-center", "spacer_3", "workspaces", "spacer_2", "active_window" ]
+widget_spacing = 15
+
+[battery]
+warning_threshold = 15
+
+[calendar]
+enabled = true
+
+[desktop_widgets]
+schema_version = 2
+widget_order = []
+
+    [desktop_widgets.grid]
+    cell_size = 16
+    major_interval = 4
+    visible = true
+
+    [desktop_widgets.widget]
+
+[location]
+address = "Madrid, Spain"
+auto_locate = true
+
+[lockscreen_widgets]
+enabled = false
+schema_version = 2
+widget_order = [ "lockscreen-login-box@winit", "lockscreen-login-box@eDP-1" ]
+
+    [lockscreen_widgets.grid]
+    cell_size = 16
+    major_interval = 4
+    visible = true
+
+    [lockscreen_widgets.widget."lockscreen-login-box@eDP-1"]
+    box_height = 196.0
+    box_width = 810.0
+    cx = 768.0
+    cy = 778.0
+    output = "eDP-1"
+    placement_height = 960.0
+    placement_width = 1536.0
+    rotation = 0.0
+    type = "login_box"
+
+        [lockscreen_widgets.widget."lockscreen-login-box@eDP-1".settings]
+        background_color = "surface_variant"
+        background_opacity = 0.88
+        background_radius = 12.0
+        center_password_text = false
+        input_opacity = 1.0
+        input_radius = 6.0
+        layout = "regular"
+        show_caps_lock = true
+        show_keyboard_layout = true
+        show_login_button = true
+        show_media = true
+        show_session_buttons = true
+        show_unlock_hint = true
+        show_weather = true
+
+    [lockscreen_widgets.widget."lockscreen-login-box@winit"]
+    box_height = 196.0
+    box_width = 810.0
+    cx = 950.0
+    cy = 949.0
+    output = "winit"
+    placement_height = 1131.0
+    placement_width = 1900.0
+    rotation = 0.0
+    type = "login_box"
+
+        [lockscreen_widgets.widget."lockscreen-login-box@winit".settings]
+        background_color = "surface_variant"
+        background_opacity = 0.88
+        background_radius = 12.0
+        center_password_text = false
+        input_opacity = 1.0
+        input_radius = 6.0
+        layout = "regular"
+        show_caps_lock = true
+        show_keyboard_layout = true
+        show_login_button = true
+        show_media = true
+        show_session_buttons = true
+        show_unlock_hint = true
+        show_weather = true
+
+[plugin_settings."kenn/keybind-cheatsheet"]
+compositor = "niri"
+
+[plugins]
+enabled = [ "kenn/keybind-cheatsheet", "noctalia/screen_recorder", "noctalia/notes" ]
+
+[shell]
+avatar_path = "/home/vinas/Pictures/Wallpapers/clouds.png"
+font_family = "JetBrainsMono NFM"
+lang = "en"
+niri_overview_type_to_launch_enabled = true
+password_style = "random"
+polkit_agent = true
+screen_time_enabled = true
+
+    [shell.greeter_sync]
+    auto_sync = true
+
+    [shell.launcher]
+    sort_by_usage = false
+
+        [shell.launcher.providers.emoji]
+        global = false
+
+        [shell.launcher.providers.session]
+        global = false
+
+        [shell.launcher.providers.wallpaper]
+        global = false
+
+        [shell.launcher.providers.windows]
+        global = false
+
+    [shell.panel]
+    open_near_click_control_center = true
+
+    [shell.screenshot]
+    confirm_region = true
+    directory = "/home/vinas/Pictures/Screenshots"
+
+[theme]
+builtin = "Catppuccin"
+community_palette = "Catppuccin Mocha Blue"
+source = "community"
+
+    [theme.templates]
+    builtin_ids = [ "alacritty", "btop", "gtk4", "ghostty", "niri", "qt" ]
+
+[wallpaper]
+directory = "/home/vinas/Pictures/Wallpapers"
+transition_on_startup = true
+
+    [wallpaper.default]
+    path = "/home/vinas/Pictures/Wallpapers/NightWaterfall.jpg"
+
+    [wallpaper.last]
+    path = "/home/vinas/Pictures/Wallpapers/NightWaterfall.jpg"
+
+    [wallpaper.monitors.eDP-1]
+    path = "/home/vinas/Pictures/Wallpapers/NightWaterfall.jpg"
+
+[widget.active_window]
+color = "on_surface_variant"
+font_scale = 0.94999999999999996
+font_weight = 300
+title_scroll = "on_hover"
+
+[widget.battery]
+capsule = true
+
+[widget.brightness]
+show_label = false
+
+[widget.clock]
+format = "%H:%M %A, %b %d"
+scale = 0.94999999999999996
+
+[widget.control-center]
+scale = 1.1000000000000001
+
+[widget.media]
+art_size = 18
+capsule = true
+color = "on_surface_variant"
+font_scale = 0.90000000000000013
+hide_when_no_media = true
+max_length = 100
+title_scroll = "on_hover"
+
+[widget.network]
+show_label = false
+show_vpn_label = true
+vpn_status = "both"
+
+[widget.session]
+color = "error"
+font_weight = 600
+
+[widget.spacer_2]
+type = "spacer"
+
+[widget.spacer_3]
+length = 15
+type = "spacer"
+
+[widget.tray]
+drawer = true
+
+[widget.volume]
+show_label = false
+
+[widget.workspaces]
+focused_color = "tertiary"
+hide_when_empty = true
+occupied_color = "primary"
+pill_scale = 0.90000000000000002
+show_labels = false
