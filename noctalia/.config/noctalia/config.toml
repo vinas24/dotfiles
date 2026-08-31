@@ -1,5 +1,11 @@
+[backdrop]
+blur_intensity = 0.29999999329447746
+enabled = true
+tint_intensity = 0.099999997764825821
+
 [bar.default]
 background_opacity = 0.89999997988343239
+center = [ "clock", "privacy" ]
 end = [ "media", "tray", "notifications", "brightness", "volume", "bluetooth", "network", "battery", "session" ]
 font_family = "JetBrainsMono NFM"
 margin_edge = 2
@@ -94,11 +100,15 @@ widget_order = [ "lockscreen-login-box@winit", "lockscreen-login-box@eDP-1" ]
         show_unlock_hint = true
         show_weather = true
 
+[plugin_settings."blackbartblues/keymap"]
+compositor = "niri"
+merge_similar = true
+
 [plugin_settings."kenn/keybind-cheatsheet"]
 compositor = "niri"
 
 [plugins]
-enabled = [ "kenn/keybind-cheatsheet", "noctalia/screen_recorder", "noctalia/notes" ]
+enabled = [ "noctalia/screen_recorder", "noctalia/notes", "blackbartblues/keymap" ]
 
 [shell]
 avatar_path = "/home/vinas/Pictures/Wallpapers/clouds.png"
@@ -137,6 +147,7 @@ screen_time_enabled = true
 [theme]
 builtin = "Catppuccin"
 community_palette = "Catppuccin Mocha Blue"
+mode = "dark"
 source = "community"
 
     [theme.templates]
@@ -168,6 +179,7 @@ capsule = true
 show_label = false
 
 [widget.clock]
+anchor = true
 format = "%H:%M %A, %b %d"
 scale = 0.94999999999999996
 
@@ -187,6 +199,9 @@ title_scroll = "on_hover"
 show_label = false
 show_vpn_label = true
 vpn_status = "both"
+
+[widget.privacy]
+hide_inactive = true
 
 [widget.session]
 color = "error"

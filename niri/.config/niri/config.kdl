@@ -287,7 +287,7 @@ layout {
 // This line starts waybar, a commonly used bar for Wayland compositors.
 //spawn-at-startup "waybar"
 // spawn-at-startup "qs" "-c" "noctalia-shell"
-spawn-at-startup "noctalia > ~/logNoctalia.txt"
+spawn-at-startup "noctalia"
 
 // To run a shell command (with variables, pipes, etc.), use spawn-sh-at-startup:
 // spawn-sh-at-startup "qs -c ~/source/qs/MyAwesomeShell"
@@ -373,6 +373,11 @@ window-rule {
 
 layer-rule {
     match namespace="^noctalia-wallpaper"
+    // place-within-backdrop true
+}
+
+layer-rule {
+    match namespace="^noctalia-backdrop"
     place-within-backdrop true
 }
 
@@ -384,7 +389,7 @@ layer-rule {
 }
 
 overview {
-    workspace-shadow {
+    /-workspace-shadow {
         off
     }
 }
@@ -415,7 +420,8 @@ binds {
     // Mod-Shift-/, which is usually the same as Mod-?,
     // shows a list of important hotkeys.
     // Mod+Shift+Slash { spawn-sh "qs -c noctalia-shell ipc call plugin:keybind-cheatsheet toggle"; }
-    Mod+Shift+Slash { spawn "noctalia" "msg" "panel-toggle" "kenn/keybind-cheatsheet:cheatsheet"; }
+    Mod+Shift+Slash hotkey-overlay-title="Open hotkey overlay" { spawn-sh "noctalia msg panel-toggle blackbartblues/keymap:panel";}
+
     // Suggested binds for running programs: terminal, app launcher, screen locker.
     Mod+Return hotkey-overlay-title="Open a Terminal: ghostty" { spawn "ghostty"; }
 
@@ -423,7 +429,7 @@ binds {
     Mod+Space hotkey-overlay-title="Run App Launcher" { spawn-sh "noctalia msg panel-toggle launcher"; }
 
     Mod+B hotkey-overlay-title="Open Browser: Zen" { spawn "zen-browser"; }
-    
+
     Alt+Tab { spawn-sh "noctalia msg window-switcher"; }
 
     // Mod+Alt+L hotkey-overlay-title="Open session menu" {spawn-sh "qs -c noctalia-shell ipc call sessionMenu toggle"; }
@@ -494,13 +500,6 @@ binds {
     Mod+Shift+K     { move-window-up; }
     Mod+Shift+L     { move-column-right; }
 
-    // Alternative commands that move across workspaces when reaching
-    // the first or last window in a column.
-    // Mod+J     { focus-window-or-workspace-down; }
-    // Mod+K     { focus-window-or-workspace-up; }
-    // Mod+Ctrl+J     { move-window-down-or-to-workspace-down; }
-    // Mod+Ctrl+K     { move-window-up-or-to-workspace-up; }
-
     Mod+Home { focus-column-first; }
     Mod+End  { focus-column-last; }
     Mod+Ctrl+Home { move-column-to-first; }
@@ -529,14 +528,6 @@ binds {
 	Mod+Alt+m {set-dynamic-cast-monitor;}
 	Mod+Alt+c {clear-dynamic-cast-target;}
 
-
-    // Alternatively, there are commands to move just a single window:
-    // Mod+Shift+Ctrl+Left  { move-window-to-monitor-left; }
-    // ...
-
-    // And you can also move a whole workspace to another monitor:
-    // Mod+Shift+Ctrl+Left  { move-workspace-to-monitor-left; }
-    // ...
 
     Mod+Page_Down      { focus-workspace-down; }
     Mod+Page_Up        { focus-workspace-up; }
@@ -708,9 +699,6 @@ switch-events {
     // lid-close { spawn "qs" "-c" "noctalia-shell" "ipc" "call" "lockScreen" "lock";}
     lid-close { spawn "noctalia" "msg" "session" "lock-and-suspend";}
 }
-
-
-
 
 
 include "noctalia.kdl"
