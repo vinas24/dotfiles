@@ -6,19 +6,19 @@ sort_translit = true
 
 [opener]
 pdf_reader = [
-    { run = 'xdg-open "$@"', orphan = true, desc = "Browser" }
+    { run = 'xdg-open "%s"', orphan = true, desc = "Browser" }
 ]
 video_player = [
-	{run = 'haruna "$@"', orphan = true, desc = "Haruna"}
+	{run = 'haruna "%s"', orphan = true, desc = "Haruna"}
 ]
 office_suite = [
-    { run = 'onlyoffice-desktopeditors "$@"', orphan = true, desc = "OnlyOffice" }
+    { run = 'onlyoffice-desktopeditors "%s"', orphan = true, desc = "OnlyOffice" }
 ]
 image_editor = [
-    { run = 'gwenview "$@"', orphan = true, desc = "Gwenview" }
+    { run = 'gwenview "%s"', orphan = true, desc = "Gwenview" }
 ]
 text_editor = [
-	{run =  'nvim "$@"', block = true, desc = "Neovim"}
+	{run =  'nvim "%s"', block = true, desc = "Neovim"}
 ]
 
 

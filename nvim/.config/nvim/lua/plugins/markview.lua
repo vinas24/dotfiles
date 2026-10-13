@@ -2,7 +2,7 @@
 local presets = require 'markview.presets'
 require('markview').setup {
   preview = {
-    enable = false,
+    enable = true,
     icon_provider = 'devicons',
     map_gx = true,
     fancy_comments = true,

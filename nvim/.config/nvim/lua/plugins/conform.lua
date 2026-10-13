@@ -12,9 +12,19 @@ require('conform').setup {
       }
     end
   end,
+  -- formatters = {
+  --   ['clang-format'] = {
+  --     prepend_args = { '--style={BasedOnStyle: LLVM, ColumnLimit: 120}' },
+  --   },
+  -- },
   formatters_by_ft = {
     lua = { 'stylua' },
     cpp = { 'clang-format' },
+    c = { 'clang-format' },
+    json = { 'prettier' },
+    yaml = { 'prettier' },
+    toml = { 'taplo' },
+    -- kdl = { 'kdlfmt' },
   },
 }
 vim.keymap.set({ '' }, '<leader>F', function()

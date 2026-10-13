@@ -14,6 +14,7 @@ ZINIT_HOME="${XDG_DATA_HOME:-${HOME}/.local/share}/zinit/zinit.git"
 if [ -f ~/.zsh_extra ]; then
     source ~/.zsh_extra
 fi
+
 #For ssh-agent to only one socket
 # export SSH_AUTH_SOCK="$HOME/.ssh/agent/ssh-agent.sock"
 # if [ ! -S "$SSH_AUTH_SOCK" ]; then
@@ -91,5 +92,9 @@ function y() {
 	rm -f -- "$tmp"
 }
 
+export GTK_IM_MODULE=simple
+
 
 . "$HOME/.local/bin/env"
+
+[ -f "/home/vinas/.ghcup/env" ] && . "/home/vinas/.ghcup/env" # ghcup-env
