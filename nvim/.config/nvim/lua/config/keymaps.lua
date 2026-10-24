@@ -1,27 +1,32 @@
--- [[ Basic Keymaps ]]
-vim.keymap.set('n', '<Esc>', '<cmd>nohlsearch<CR>')
+vim.keymap.set('n', '<Esc>', ':nohl<CR>', { desc = 'Clear search highlighting', silent = true })
 
-vim.keymap.set('n', '<leader>e', vim.diagnostic.open_float, { desc = 'Open diagnostic float' })
-vim.keymap.set('n', 'gn', vim.diagnostic.goto_next, { desc = '[G]o to [N]ext diagnostic' })
-vim.keymap.set('n', 'gp', vim.diagnostic.goto_prev, { desc = '[G]o to [P]revious diagnostic' })
+vim.keymap.set('x', 'p', [["_dP]], { desc = 'Paste over selection without losing yanked text' })
+vim.keymap.set({ 'n', 'v' }, '<leader>d', [["_d]], { desc = 'Delete without yanking' })
+
+vim.keymap.set('n', 'gn', '<Cmd>try | cnext | catch | cfirst | catch | endtry<CR>', { desc = '[G]o to [N]ext diagnostic' })
+vim.keymap.set('n', 'gp', '<Cmd>try | cprevious | catch | clast | catch | endtry<CR>', { desc = '[G]o to [P]revious diagnostic' })
 vim.keymap.set('n', '<leader>q', vim.diagnostic.setloclist, { desc = 'Open diagnostic [Q]uickfix list' })
 
 vim.keymap.set('t', '<Esc><Esc>', '<C-\\><C-n>', { desc = 'Exit terminal mode' })
+vim.keymap.set('n', '<leader>re', '<cmd>restart<CR>', { desc = 'Restart neovim' })
 
--- Open terminal at the bottom
-vim.keymap.set('n', '<leader>st', function()
-  vim.cmd.vnew()
-  vim.cmd.term()
-  vim.cmd.wincmd 'J'
-  vim.api.nvim_win_set_height(0, 10)
-end)
+vim.keymap.set('n', '<C-d>', '<C-d>zz', { desc = 'move down in buffer with cursor centered' })
+vim.keymap.set('n', '<C-u>', '<C-u>zz', { desc = 'move up in buffer with cursor centered' })
 
+vim.keymap.set('n', 'n', 'nzzzv', { desc = 'Next search result centered' })
+vim.keymap.set('n', 'N', 'Nzzzv', { desc = 'Previous search result centered' })
+
+--undoTree
+vim.keymap.set('n', '<leader>u', function()
+  vim.cmd.packadd 'nvim.undotree'
+  require('undotree').open()
+end, { desc = 'Toggle Builtin Undotree' })
+
+-- Window and tmux navigation
 vim.keymap.set('n', '<C-S-h>', '<C-w>H', { desc = 'Move window to the left' })
 vim.keymap.set('n', '<C-S-l>', '<C-w>L', { desc = 'Move window to the right' })
 vim.keymap.set('n', '<C-S-j>', '<C-w>J', { desc = 'Move window to the lower' })
 vim.keymap.set('n', '<C-S-k>', '<C-w>K', { desc = 'Move window to the upper' })
-
--- Tmux navigation (vim-tmux-navigator plugin commands)
 vim.keymap.set('n', '<c-h>', '<cmd><C-U>TmuxNavigateLeft<cr>')
 vim.keymap.set('n', '<c-j>', '<cmd><C-U>TmuxNavigateDown<cr>')
 vim.keymap.set('n', '<c-k>', '<cmd><C-U>TmuxNavigateUp<cr>')

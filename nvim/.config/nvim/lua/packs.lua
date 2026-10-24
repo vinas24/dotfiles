@@ -1,6 +1,3 @@
--- [[ Install hooks ]]
--- Must be created BEFORE vim.pack.add() so the very first install run picks
--- them up (matters when bootstrapping from the lockfile on a new machine).
 vim.api.nvim_create_autocmd('PackChanged', {
   group = vim.api.nvim_create_augroup('pack-hooks', { clear = true }),
   callback = function(ev)
@@ -18,7 +15,6 @@ vim.api.nvim_create_autocmd('PackChanged', {
   end,
 })
 
--- [[ Install and load plugins ]]
 vim.pack.add {
   'https://github.com/NMAC427/guess-indent.nvim',
   'https://github.com/lewis6991/gitsigns.nvim',
@@ -45,7 +41,7 @@ vim.pack.add {
   'https://github.com/rcarriga/nvim-dap-ui',
   'https://github.com/nvim-neotest/nvim-nio',
   'https://github.com/jay-babu/mason-nvim-dap.nvim',
-  'https://github.com/leoluz/nvim-dap-go',
+  -- 'https://github.com/leoluz/nvim-dap-go',
   'https://github.com/saghen/blink.lib',
   'https://github.com/saghen/blink.cmp',
   'https://github.com/rafamadriz/friendly-snippets',
