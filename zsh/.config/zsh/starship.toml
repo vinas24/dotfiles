@@ -1,0 +1,88 @@
+"$schema" = 'https://starship.rs/config-schema.json'
+add_newline = false
+format = """
+$username\
+$hostname\
+$directory\
+$git_branch\
+$git_state\
+$git_status\
+$fill\
+$cmd_duration\
+$line_break\
+$python\
+$character"""
+
+[username]
+style_user = "242"
+style_root = "7"
+format = "[$user]($style)"
+
+[hostname]
+ssh_only = true
+format = "[@hostname]($style)"
+style = "242"
+
+[directory]
+style = "4"
+truncation_length = 0
+truncate_to_repo = false
+
+[character]
+success_symbol = "[❯](5)"
+error_symbol = "[❯](1)"
+vimcmd_symbol = "[❮](5)"
+
+[git_branch]
+format = "[$branch]($style)"
+style = "242"
+
+[git_state]
+format = '\([$state( $progress_current/$progress_total)]($style)\)'
+style = "242"
+
+[git_status]
+format = "[[(*$conflicted$untracked$modified$staged$renamed$deleted)](242) ($ahead_behind$stashed)]($style)"
+style = "cyan"
+conflicted = "\u200B"
+untracked = "\u200B"
+modified = "\u200B"
+staged = "\u200B"
+renamed = "\u200B"
+deleted = "\u200B"
+ahead = "⇡"
+behind = "⇣"
+diverged = "⇡⇣"
+stashed = "≡"
+
+[fill]
+symbol = " "
+
+[cmd_duration]
+min_time = 5000
+format = "[$duration]($style) "
+style = "3"
+
+[python]
+format = "[$virtualenv]($style) "
+style = "242"
+detect_extensions = []
+detect_files = []
+
+[jj_bookmark]
+format = "[$bookmark(@$remote)$diverged( \\(+$overflow_count others\\))]($style)"
+style = "bright-black"
+
+[jj_status]
+format = "[[(*$all)](218)]($style)"
+style = "cyan"
+conflicted = "​"
+description_empty = ""
+description_present = ""
+hidden = "​"
+immutable = "​"
+added = "​"
+copied = ""
+deleted = "​"
+modified = "​"
+renamed = "​"

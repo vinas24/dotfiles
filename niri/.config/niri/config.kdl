@@ -13,10 +13,7 @@ input {
 	repeat-rate 35
 	repeat-delay 200
         xkb {
-            // You can set rules, model, layout, variant and options.
-            // For more information, see xkeyboard-config(7).
 
-            // For example:
 	     layout "us, us, es"
 	     variant "basic, intl, basic"
              options "grp:alt_space_toggle, caps:escape" // If this section is empty, niri will fetch xkb settings from org.freedesktop.locale1. You can control these using localectl set-x11-keymap. } Enable numlock on startup, omitting this setting disables it. numlock } Next sections include libinput settings.
@@ -441,7 +438,7 @@ binds {
     Super+Shift+Slash hotkey-overlay-title="Open hotkey overlay" { spawn-sh "noctalia msg panel-toggle kenn/keybind-cheatsheet:cheatsheet";}
 
     // Suggested binds for running programs: terminal, app launcher, screen locker.
-    Super+Return hotkey-overlay-title="Open a Terminal: ghostty" { spawn "ghostty"; }
+    Super+Return hotkey-overlay-title="Open a Terminal: foot" { spawn "foot"; }
 
     // Super+Space hotkey-overlay-title="Run App Launcher" { spawn-sh "qs -c noctalia-shell ipc call launcher toggle"; }
     Super+Space hotkey-overlay-title="Run App Launcher" { spawn-sh "noctalia msg panel-toggle launcher"; }
