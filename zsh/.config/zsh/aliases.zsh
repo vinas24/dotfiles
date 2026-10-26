@@ -11,7 +11,5 @@ alias grep='rg --color=auto'
 alias diff='diff --color=auto'
 alias df-'df -h'
 
-# alias -- -= 'cd -'
 alias vim='nvim'
-
 

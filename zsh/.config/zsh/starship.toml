@@ -27,6 +27,9 @@ style = "242"
 style = "4"
 truncation_length = 0
 truncate_to_repo = false
+read_only = " \uf023"
+read_only_style = "4"
+
 
 [character]
 success_symbol = "[❯](5)"

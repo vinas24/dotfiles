@@ -1,0 +1,75 @@
+[user]
+	name = Sergio Viñas
+	email = sergiovinas242004@gmail.com
+[core]
+	whitespace = error
+	preloadindex = true
+[advice]
+	addEmptyPathspec = false
+	pushNonFastForward = false
+	statusHints = false
+
+[url "git@github.com:vinas24/"]
+	insteadOf = "v24:"
+[url "git@github.com:"]
+	insteadOf = "gh:"
+
+[init]
+	defaultBranch = main
+
+[status]
+	branch = true
+	showStash=true
+	showUntrackedFiles = all
+
+[diff]
+	context = 3
+	renames = copies
+	interHunkContext = 10
+
+[color "diff"]
+	meta = black bold
+	frag = magenta
+	context = white
+	whitespace = yellow reverse
+	old = red
+
+[pager]
+	diff = diff-so-fancy | $PAGER
+
+[diff-so-fancy]
+	markEmptyLines = false
+
+[interactive]
+	diffFilter = diff-so-fancy --patch
+	singlekey = true
+
+[push]
+	autoSetupRemote = true
+	default = current
+	followTags = true
+
+[pull]
+	default = current
+	rebase = true
+
+[rebase]
+	autoStash = true
+	missingCommitsCheck = warn
+
+[color "decorate"]
+	HEAD = red
+	branch = blue
+	tag = yellow
+	remoteBranch = magenta
+
+[branch]
+	sort = -committerdate
+[tag]
+	sort = -taggerdate
+[color "branch"]
+	current = magenta
+	local = default
+	remote = yellow
+	upstream = green
+	plain = blue
